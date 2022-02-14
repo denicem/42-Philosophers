@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:16:14 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/14 17:01:38 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:05:57 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@
 // 	return ((void *) res);
 // }
 
-void *print_create()
+void *print_create(void *arg)
 {
-	printf("Created.\n");
+	t_philo *philo;
+
+	philo = (t_philo *) arg;
+	printf("Philosopher %d sucessfully created.\n", philo->id);
 	return (NULL);
 }
 
@@ -141,7 +144,7 @@ void	init_philos()
 	{
 		info()->philos[i] = malloc(sizeof(t_philo *));
 		info()->philos[i]->id = i;
-		if (pthread_create(&info()->philos[i]->p_id, NULL, &print_create, NULL));
+		if (pthread_create(&info()->philos[i]->p_id, NULL, &print_create, info()->philos[i]))
 			printf("Philosopher won't join. :(");
 		if (pthread_mutex_init(&info()->philos[i]->fork, NULL))
 			printf("Philosopher didn't get a fork. :(");
