@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/15 22:16:40 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/15 23:16:13 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	init_data(char **argv);
 void	print_data();
 
 void	init_philos();
-void	print_msg(int id, char *msg);
+void	print_act(int id, char *msg);
+void	*philo_activity(void *arg);
 void	philo_sleep(int id);
-
-void *print_create(void *arg);
+void	philo_eat(int id, int next_id);
 
 #	endif
