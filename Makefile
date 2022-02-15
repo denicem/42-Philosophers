@@ -6,7 +6,7 @@
 #    By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:20:21 by dmontema          #+#    #+#              #
-#    Updated: 2022/02/15 18:22:55 by dmontema         ###   ########.fr        #
+#    Updated: 2022/02/15 19:08:07 by dmontema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ INCS	=	-I./inc
 
 SRC_DIR		=	src
 SRCS		= 	$(SRC_DIR)/main.c \
-				$(SRC_DIR)/data.c
+				$(SRC_DIR)/data.c \
+				$(SRC_DIR)/philosophers.c
 OBJ_DIR		= 	obj
 OBJS		=	$(SRCS:.c=.o) # $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

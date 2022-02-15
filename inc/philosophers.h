@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/15 19:00:11 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/15 22:16:40 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
 	int				id;
+	int				next;
 	pthread_t		p_id;
 	pthread_mutex_t	fork;
 }	t_philo;
@@ -34,12 +36,19 @@ typedef struct s_data
 	int		time_to_sleep;
 	int		count_meal;
 	t_philo	**philos;
+
+	struct timeval	curr_t;
+	int				timestamp;
+	pthread_mutex_t	sleep_lock;
 }	t_data;
 
 t_data	*data();
 void	init_data(char **argv);
 void	print_data();
+
 void	init_philos();
+void	print_msg(int id, char *msg);
+void	philo_sleep(int id);
 
 void *print_create(void *arg);
 

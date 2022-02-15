@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:21:52 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/15 18:55:57 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/15 22:10:22 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void init_data(char **argv)
 	data()->time_to_sleep = atoi(argv[4]);
 	if (argv[5])
 		data()->count_meal = atoi(argv[5]);
+	else
+		data()->count_meal = -1;
+	data()->timestamp = gettimeofday(&data()->curr_t, NULL);
+	pthread_mutex_init(&data()->sleep_lock, NULL);
 	data()->philos = malloc(sizeof(t_philo **) * data()->count_philo);
 	init_philos();
 }
@@ -38,24 +42,8 @@ void	print_data()
 	printf("Time to die:\t%d\n", data()->time_to_die);
 	printf("Time to eat:\t%d\n", data()->time_to_eat);
 	printf("Time to sleep:\t%d\n", data()->time_to_sleep);
-	printf("Meal goals:\t%d\n", data()->count_meal);
-}
-
-void	init_philos()
-{
-	int i;
-	int count_philo;
-
-	i = 0;
-	count_philo = data()->count_philo;
-	while (i < count_philo)
-	{
-		data()->philos[i] = malloc(sizeof(t_philo *));
-		data()->philos[i]->id = i + 1;
-		if (pthread_create(&data()->philos[i]->p_id, NULL, &print_create, data()->philos[i]))
-			printf("Philosopher won't join. :(");
-		if (pthread_mutex_init(&data()->philos[i]->fork, NULL))
-			printf("Philosopher didn't get a fork. :(");
-		i++;
-	}
+	if (data()->count_meal >= 0)
+		printf("Meal goals:\t%d\n", data()->count_meal);
+	else
+		printf("Meal goals:\t%c\n", '/');
 }
