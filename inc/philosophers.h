@@ -6,12 +6,16 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/14 17:01:43 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:00:11 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
+
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 # include <pthread.h>
 
 typedef struct s_philo
@@ -21,9 +25,8 @@ typedef struct s_philo
 	pthread_mutex_t	fork;
 }	t_philo;
 
-void	init_philos();
 
-typedef struct s_info
+typedef struct s_data
 {
 	int		count_philo;
 	int		time_to_die;
@@ -31,13 +34,13 @@ typedef struct s_info
 	int		time_to_sleep;
 	int		count_meal;
 	t_philo	**philos;
-}	t_info;
+}	t_data;
 
-t_info	*info();
-void	init_info(char **argv);
-void	print_info();
+t_data	*data();
+void	init_data(char **argv);
+void	print_data();
+void	init_philos();
 
-// DUMP
-// t_philo	*new_philo(int th_id);
-// int		insert_philo(t_philo **head, t_philo *new);
-// void	print_philos(t_philo *head);
+void *print_create(void *arg);
+
+#	endif
