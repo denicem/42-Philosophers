@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 16:16:14 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/17 16:41:15 by dmontema         ###   ########.fr       */
+/*   Created: 2022/02/17 16:08:31 by dmontema          #+#    #+#             */
+/*   Updated: 2022/02/17 16:55:52 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char *argv[])
+time_t	timestamp(void)
 {
-	// (void) argc;
-	// (void) argv;
-	if (argc == 5 || argc == 6)
+	struct timeval	time;
+	time_t			ms;
+
+	gettimeofday(&time, NULL);
+	ms = time.tv_sec * 1000;
+	ms += time.tv_usec / 1000;
+	return (ms);
+}
+
+void	ft_usleep(time_t val)
+{
+	time_t curr;
+
+	curr = timestamp();
+	while (1)
 	{
-		init_data(argv);
-		// print_data();
-		for (int i = 0; i < data()->count_philo; i++)
-			pthread_join(data()->philos[i]->p_id, NULL);
+		if (val + curr < timestamp())
+			break ;
+		usleep(50);
 	}
-	else
-		printf("Wrong number of arguments. Try again.\n");
-	return (0);
 }

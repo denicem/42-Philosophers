@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:21:52 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/15 22:10:22 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:23:39 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void init_data(char **argv)
 		data()->count_meal = atoi(argv[5]);
 	else
 		data()->count_meal = -1;
-	data()->timestamp = gettimeofday(&data()->curr_t, NULL);
+	data()->start = timestamp();
 	pthread_mutex_init(&data()->sleep_lock, NULL);
+	pthread_mutex_init(&data()->print_lock, NULL);
 	data()->philos = malloc(sizeof(t_philo **) * data()->count_philo);
 	init_philos();
 }
