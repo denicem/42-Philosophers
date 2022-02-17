@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:08:31 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/17 16:55:52 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/17 18:09:58 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_usleep(time_t val)
 	curr = timestamp();
 	while (1)
 	{
-		if (val + curr < timestamp())
+		if (val + curr <= timestamp())
 			break ;
 		usleep(50);
 	}

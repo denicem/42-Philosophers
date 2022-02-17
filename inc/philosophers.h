@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/17 17:29:00 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/02/17 21:07:38 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_philo
 	int				next;
 	pthread_t		p_id;
 	pthread_mutex_t	fork;
+	time_t			last_meal;
+	int				meals;
 }	t_philo;
 
 
@@ -40,6 +42,7 @@ typedef struct s_data
 	time_t			start;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	sleep_lock;
+	pthread_mutex_t	eat_lock;
 }	t_data;
 
 t_data	*data();
