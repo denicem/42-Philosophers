@@ -5,47 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 18:21:52 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/17 17:53:41 by dmontema         ###   ########.fr       */
+/*   Created: 2022/02/21 21:08:32 by dmontema          #+#    #+#             */
+/*   Updated: 2022/02/24 22:05:15 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_data	*data()
+t_data	*data(void)
 {
 	static t_data	data;
 
 	return (&data);
 }
 
-void init_data(char **argv)
+t_philo	*new_philo(int id)
 {
-	data()->count_philo = atoi(argv[1]);
-	data()->time_to_die = atoi(argv[2]);
-	data()->time_to_eat = atoi(argv[3]);
-	data()->time_to_sleep = atoi(argv[4]);
-	if (argv[5])
-		data()->count_meal = atoi(argv[5]);
+	t_philo	*philo;
+
+	philo = malloc(sizeof(t_philo));
+	if (!philo)
+		return (NULL);
+	philo->id = id;
+	philo->next_id = (id + 1) % data()->count_philos;
+	philo->status = waiting;
+	philo->meals = 0;
+	if (pthread_mutex_init(&philo->fork, NULL))
+		return (NULL);
+	if (pthread_create(&philo->p_id, NULL, &philo_activity, (void *) philo))
+		return (NULL);
 	else
-		data()->count_meal = -1;
-	data()->start = timestamp();
-	pthread_mutex_init(&data()->print_lock, NULL);
-	pthread_mutex_init(&data()->sleep_lock, NULL);
-	pthread_mutex_init(&data()->eat_lock, NULL);
-	data()->philos = malloc(sizeof(t_philo **) * data()->count_philo);
-	init_philos();
+		data()->philos_created++;
+	return (philo);
 }
 
-void	print_data()
+void	init_philos(void)
 {
-	printf("INFO:\n");
-	printf("Philosophers:\t%d\n", data()->count_philo);
-	printf("Time to die:\t%d\n", data()->time_to_die);
-	printf("Time to eat:\t%d\n", data()->time_to_eat);
-	printf("Time to sleep:\t%d\n", data()->time_to_sleep);
-	if (data()->count_meal >= 0)
-		printf("Meal goals:\t%d\n", data()->count_meal);
+	int	i;
+
+	i = 0;
+	while (i < data()->count_philos)
+	{
+		data()->philos[i] = new_philo(i);
+		if (!data()->philos[i])
+			return ; // TODO: free all philos, if initializing mutex failed.
+		i++;
+	}
+	data()->philos[i] = 0;
+}
+
+void	init_data(char **args)
+{
+	data()->count_philos = atoi(args[1]);
+	data()->time_to_die = atoi(args[2]);
+	data()->time_to_eat = atoi(args[3]);
+	data()->time_to_sleep = atoi(args[4]);
+	if (args[5])
+		data()->count_meals = atoi(args[5]);
 	else
-		printf("Meal goals:\t%c\n", '/');
+		data()->count_meals = -1;
+	data()->philos = malloc(sizeof(t_philo *) * data()->count_philos + 1);
+	if (!data()->philos)
+		return ; // TODO: call a error-exiting func!
+	pthread_mutex_init(&data()->print, NULL);
+	data()->philos_created = 0;
+	data()->start = timestamp();
+	init_philos();
 }
