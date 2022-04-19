@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/18 22:07:02 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:48:42 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ int		philo_think(int id);
 int		switch_status(int id, int before);
 
 bool	check_all_alive(void);
+bool	check_philo_starving(t_philo *philo);
+bool	check_philo_is_full(t_philo *philo);
+bool	check_all_full(void);
 
 time_t	timestamp(void);
 void	ft_usleep(time_t val);
