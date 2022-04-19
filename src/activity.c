@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:54:08 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/24 22:20:01 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:20:00 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,26 @@ void	*philo_activity(void *arg)
 
 	while (data()->philos_created < data()->count_philos)
 		usleep(50);
-	// data()->start = timestamp();
 	philo = (t_philo *) arg;
 	philo->last_meal = timestamp();
 	if (philo->id % 2)
 		ft_usleep(data()->time_to_eat);
-	for (;;)
+	while (philo->status != dead && check_all_alive())
 	{
-		if (philo->status == waiting)
-			philo_eat(philo->id, philo->next_id);
-		if (philo->status == sleeping)
-			philo_sleep(philo->id);
-		if (philo->status == thinking)
-			switch_status(philo->id, thinking);
+		if (timestamp() - philo->last_meal > data()->time_to_die)
+		{
+			print_act(philo->id, "has died.");
+			philo->status = dead;
+		}
+		else
+		{
+			if (philo->status == waiting)
+				philo_eat(philo->id, philo->next_id);
+			if (philo->status == sleeping)
+				philo_sleep(philo->id);
+			if (philo->status == thinking)
+				philo_think(philo->id);
+		}
 	}
 	return (NULL);
 }
@@ -61,6 +68,13 @@ int	philo_sleep(int id)
 	print_act(id, "is sleeping.");
 	ft_usleep(data()->time_to_sleep);
 	switch_status(id, sleeping);
+	return (1);
+}
+
+int	philo_think(int id)
+{
+	print_act(id, "is thinking.");
+	switch_status(id, thinking);
 	return (1);
 }
 

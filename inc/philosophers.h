@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/24 22:15:12 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/18 22:07:02 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
 
 enum e_status
 {
+	dead = -1,
 	waiting,
 	sleeping,
 	thinking
@@ -62,7 +64,10 @@ void	*philo_activity(void *arg);
 void	print_act(int id, char *msg);
 int		philo_eat(int id, int next_id);
 int		philo_sleep(int id);
+int		philo_think(int id);
 int		switch_status(int id, int before);
+
+bool	check_all_alive(void);
 
 time_t	timestamp(void);
 void	ft_usleep(time_t val);
