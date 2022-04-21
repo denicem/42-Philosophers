@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
+/*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:03 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/19 20:10:23 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:20:43 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,20 @@ bool	check_all_alive(void)
 
 bool	check_philo_starving(t_philo *philo)
 {
-	if (timestamp() - philo->last_meal >= data()->time_to_die)
+	pthread_mutex_lock(&data()->lock);
+	if (timestamp() - philo->last_meal >= data()->time_to_die && data()->all_alive)
 	{
-		philo->status = dead;
-		print_act(philo->id, "has died.");
+		// printf("OK\n");
+		// philo->status = dead;
+		data()->all_alive = false;
+		// print_act(philo->id, "died.");
+		pthread_mutex_lock(&data()->print);
+		printf("%ld\tPhilo %d died.\n", timestamp() - data()->start, philo->id + 1);
+		pthread_mutex_unlock(&data()->print);
+		pthread_mutex_unlock(&data()->lock);
 		return (true);
 	}
+	pthread_mutex_unlock(&data()->lock);
 	return (false);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
+/*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/19 19:48:42 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:43:20 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_philo
 	int				next_id;
 	pthread_t		p_id;
 	pthread_mutex_t	fork;
+	bool			fork_free;
 
 	int				status;
 	int				meals;
@@ -49,10 +50,11 @@ typedef struct s_data
 	int		time_to_sleep;
 	int		count_meals;
 	t_philo	**philos;
-
+	bool	all_alive;
 	int		philos_created;
 	time_t	start;
 	pthread_mutex_t	print;
+	pthread_mutex_t	lock;
 }	t_data;
 
 t_data	*data(void);
@@ -62,7 +64,7 @@ void	init_data(char **args);
 
 void	*philo_activity(void *arg);
 void	print_act(int id, char *msg);
-int		philo_eat(int id, int next_id);
+void    philo_eats(t_philo *philo);
 int		philo_sleep(int id);
 int		philo_think(int id);
 int		switch_status(int id, int before);
