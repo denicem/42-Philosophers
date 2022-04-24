@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:54:08 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/24 19:22:40 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/24 22:39:51 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	*philo_activity(void *arg)
 
 	while (data()->philos_created < data()->count_philos)
 		usleep(50);
-	if (data)
+	if (!data()->start)
+		data()->start = timestamp();
 	philo = (t_philo *) arg;
 	philo->last_meal = timestamp();
 	if (philo->id % 2)
@@ -29,9 +30,9 @@ void	*philo_activity(void *arg)
 		{
 			if (philo->status == waiting)
 				philo_eats(philo);
-			if (philo->status == sleeping)
+			else if (philo->status == sleeping)
 				philo_sleeps(philo);
-			if (philo->status == thinking)
+			else if (philo->status == thinking)
 				philo_thinks(philo->id);
 		}
 	}
@@ -50,16 +51,6 @@ void	print_act(int id, char *msg)
 	pthread_mutex_unlock(&data()->lock);
 }
 
-int	philo_thinks(int id)
-{
-	if (data()->all_alive)
-	{
-		print_act(id, "is thinking.");
-		switch_status(id, thinking);
-	}
-	return (1);
-}
-
 int	switch_status(int id, int before)
 {
 	if (before == waiting)
@@ -68,5 +59,15 @@ int	switch_status(int id, int before)
 		data()->philos[id]->status = thinking;
 	else if (before == thinking)
 		data()->philos[id]->status = waiting;
+	return (1);
+}
+
+int	philo_thinks(int id)
+{
+	if (data()->all_alive)
+	{
+		print_act(id, "is thinking.");
+		switch_status(id, thinking);
+	}
 	return (1);
 }

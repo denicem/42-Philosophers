@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/24 19:17:11 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:29:10 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ bool	check_all_full(void);
 
 time_t	timestamp(void);
 void	ft_usleep(time_t val);
+
+int	ft_atoi(const char *str);
 
 #	endif

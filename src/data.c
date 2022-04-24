@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:08:32 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/24 19:20:45 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:28:14 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void	init_philos(void)
 
 void	init_data(char **args)
 {
-	data()->count_philos = atoi(args[1]);
-	data()->time_to_die = atoi(args[2]);
-	data()->time_to_eat = atoi(args[3]);
-	data()->time_to_sleep = atoi(args[4]);
+	data()->count_philos = ft_atoi(args[1]);
+	data()->time_to_die = ft_atoi(args[2]);
+	data()->time_to_eat = ft_atoi(args[3]);
+	data()->time_to_sleep = ft_atoi(args[4]);
 	if (args[5])
-		data()->count_meals = atoi(args[5]);
+		data()->count_meals = ft_atoi(args[5]);
 	else
 		data()->count_meals = -1;
 	data()->all_alive = true;

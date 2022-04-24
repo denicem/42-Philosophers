@@ -6,7 +6,7 @@
 #    By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:20:21 by dmontema          #+#    #+#              #
-#    Updated: 2022/04/24 17:47:11 by dmontema         ###   ########.fr        #
+#    Updated: 2022/04/25 00:24:16 by dmontema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS		= 	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/data.c \
 				$(SRC_DIR)/activity.c \
 				$(SRC_DIR)/time.c \
+				$(SRC_DIR)/ft_atoi.c \
 				$(SRC_DIR)/philo_checker.c \
 				$(SRC_DIR)/philo_eat.c \
 				$(SRC_DIR)/philo_sleep.c
@@ -45,7 +46,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(CYAN)Installing philosophers...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -lpthread
 	@echo "$(GREEN)\tCOMPLETE!$(RESET)"
 
 .c.o:
