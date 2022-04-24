@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:08:32 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/21 17:42:41 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/24 19:20:45 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	init_philos(void)
 			return ; // TODO: free all philos, if initializing mutex failed.
 		i++;
 	}
-	data()->start = timestamp();
 	data()->philos[i] = 0;
 }
 
@@ -73,5 +72,6 @@ void	init_data(char **args)
 	pthread_mutex_init(&data()->print, NULL);
 	pthread_mutex_init(&data()->lock, NULL);
 	data()->philos_created = 0;
+	data()->start = 0;
 	init_philos();
 }

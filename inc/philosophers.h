@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 18:14:59 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/21 17:43:20 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/24 19:17:11 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	init_data(char **args);
 void	*philo_activity(void *arg);
 void	print_act(int id, char *msg);
 void    philo_eats(t_philo *philo);
-int		philo_sleep(int id);
-int		philo_think(int id);
+void    philo_sleeps(t_philo *philo);
+int		philo_thinks(int id);
 int		switch_status(int id, int before);
 
 bool	check_all_alive(void);
