@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmontema <dmontema@42.fr>                  +#+  +:+       +#+        */
+/*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:08:31 by dmontema          #+#    #+#             */
-/*   Updated: 2022/02/24 22:11:09 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:39:37 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ time_t	timestamp(void)
 
 void	ft_usleep(time_t val)
 {
-	time_t target;
+	time_t	target;
 
 	target = timestamp() + val;
 	while (timestamp() < target)

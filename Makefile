@@ -6,7 +6,7 @@
 #    By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:20:21 by dmontema          #+#    #+#              #
-#    Updated: 2022/04/25 00:24:16 by dmontema         ###   ########.fr        #
+#    Updated: 2022/04/25 00:36:51 by dmontema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,5 +62,5 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette -R CheckForbiddenSourceHeader src/*.c | grep --color=always 'Error!\|Error:' || echo "$(GREEN)Everything is OK!$(RESET)" >&1
+	@norminette -R CheckForbiddenSourceHeader $(SRCS) | grep --color=always 'Error!\|Error:' || echo "$(GREEN)Everything is OK!$(RESET)" >&1
 

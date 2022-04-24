@@ -6,13 +6,13 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 17:40:11 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/24 18:10:27 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:44:50 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void philo_sleeps(t_philo *philo)
+void	philo_sleeps(t_philo *philo)
 {
 	time_t	sleep_dur;
 

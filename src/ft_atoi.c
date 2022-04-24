@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 16:49:04 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 00:26:21 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:40:34 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-static int	ft_isWhitespace(char c)
+static int	ft_iswhitespace(char c)
 {
 	if (c == ' ' || (c >= '\b' && c <= '\r'))
 		return (1);
 	return (0);
 }
 
-static int	ft_calcRes(const char *str, int sign)
+static int	ft_calcres(const char *str, int sign)
 {
 	int	res;
 
@@ -63,7 +63,7 @@ int	ft_atoi(const char *str)
 		return (0);
 	res = 0;
 	sign = 1;
-	while (ft_isWhitespace(*str))
+	while (ft_iswhitespace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
 	{
@@ -71,6 +71,6 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	res = ft_calcRes(str, sign);
+	res = ft_calcres(str, sign);
 	return (res * sign);
 }

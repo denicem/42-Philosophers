@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:03 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/24 18:08:30 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:41:54 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,11 @@ bool	check_all_alive(void)
 bool	check_philo_starving(t_philo *philo)
 {
 	pthread_mutex_lock(&data()->lock);
-	if (timestamp() - philo->last_meal >= data()->time_to_die && data()->all_alive)
+	if (timestamp() - philo->last_meal >= data()->time_to_die
+		&& data()->all_alive)
 	{
-		// printf("OK\n");
-		// philo->status = dead;
-		// print_act(philo->id, "died.");
 		data()->all_alive = false;
-		pthread_mutex_lock(&data()->print);
-		printf("%ld\tPhilo %d died.\n", timestamp() - data()->start, philo->id + 1);
-		pthread_mutex_unlock(&data()->print);
+		print_act(philo->id, "died.");
 		pthread_mutex_unlock(&data()->lock);
 		return (true);
 	}
