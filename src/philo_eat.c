@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:02:03 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 21:18:49 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:08:00 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ void	take_one_fork(t_philo *philo)
 	bool	fork_taken;
 
 	fork_taken = false;
-	while (!fork_taken)
+	while (!fork_taken && data()->all_alive)
 	{
-		printf("OK\n");
 		pthread_mutex_lock(&philo->fork);
 		if (philo->fork_free)
 		{
@@ -51,6 +50,8 @@ void	philo_eats(t_philo *philo)
 		print_act(philo->id, "has taken a fork.");
 		take_one_fork(data()->philos[philo->next_id]);
 		print_act(philo->id, "has taken a fork.");
+		if (!data()->all_alive)
+			return ;
 		philo->meals++;
 		philo->last_meal = timestamp();
 		print_act(philo->id, "is eating.");

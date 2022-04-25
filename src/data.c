@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:08:32 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 21:06:36 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 22:42:18 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_philos(void)
 	int	i;
 
 	i = 0;
-	while (data()->philos[i])
+	while (i < data()->count_philos)
 	{
 		pthread_mutex_destroy(&data()->philos[i]->fork);
 		free(data()->philos[i]);
@@ -79,7 +79,6 @@ int	init_philos(void)
 		}
 		i++;
 	}
-	data()->philos[i] = 0;
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 16:16:14 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 21:01:23 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/26 00:16:47 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	error_msg(char *str)
 	return (FAIL);
 }
 
-
-
 void	philo_join(void)
 {
 	int	i;
@@ -33,6 +31,7 @@ void	philo_join(void)
 		pthread_join(data()->philos[i]->p_id, NULL);
 		i++;
 	}
+	free_philos();
 }
 
 int	main(int argc, char *argv[])

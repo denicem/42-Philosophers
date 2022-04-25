@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 16:49:04 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 00:40:34 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:53:41 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ static int	ft_iswhitespace(char c)
 
 static int	ft_calcres(const char *str, int sign)
 {
-	int	res;
+	long	res;
 
 	res = 0;
 	while (ft_isdigit(*str))
 	{
-		res = res * 10 + (ft_isdigit(*str) - '0');
 		if (sign == -1 && res >= INT_MAX)
-			return (INT_MIN);
+			return (0);
 		else if (res >= INT_MAX)
-			return (INT_MAX);
+			return (0);
+		res = res * 10 + (ft_isdigit(*str) - '0');
 		str++;
 	}
 	return (res);

@@ -6,7 +6,7 @@
 #    By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:20:21 by dmontema          #+#    #+#              #
-#    Updated: 2022/04/25 16:42:57 by dmontema         ###   ########.fr        #
+#    Updated: 2022/04/26 00:17:56 by dmontema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,7 @@ SRCS		= 	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/philo_eat.c \
 				$(SRC_DIR)/philo_sleep.c
 
-OBJ_DIR		= 	obj
-OBJS		=	$(SRCS:.c=.o) # $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS		=	$(SRCS:.c=.o)
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -g #-fsanitize=address

@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 21:54:08 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/24 22:39:51 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:05:40 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*philo_activity(void *arg)
 		data()->start = timestamp();
 	philo = (t_philo *) arg;
 	philo->last_meal = timestamp();
-	if (philo->id % 2)
+	if (!(philo->id % 2))
 		ft_usleep(data()->time_to_eat);
 	while (philo->status != dead && data()->all_alive && !check_all_full())
 	{
