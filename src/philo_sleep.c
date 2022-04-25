@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 17:40:11 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 00:44:50 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:18:06 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	philo_sleeps(t_philo *philo)
 		while (timestamp() <= sleep_dur && data()->all_alive)
 		{
 			usleep(50);
-			check_philo_starving(philo);
+			if (check_philo_starving(philo))
+				break ;
 		}
 		switch_status(philo->id, sleeping);
 	}

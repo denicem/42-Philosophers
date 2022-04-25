@@ -6,7 +6,7 @@
 /*   By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:02:03 by dmontema          #+#    #+#             */
-/*   Updated: 2022/04/25 00:43:24 by dmontema         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:18:49 by dmontema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	take_one_fork(t_philo *philo)
 	fork_taken = false;
 	while (!fork_taken)
 	{
+		printf("OK\n");
 		pthread_mutex_lock(&philo->fork);
 		if (philo->fork_free)
 		{
@@ -37,7 +38,8 @@ void	take_one_fork(t_philo *philo)
 		}
 		pthread_mutex_unlock(&philo->fork);
 		usleep(50);
-		check_philo_starving(philo);
+		if (check_philo_starving(philo))
+			break ;
 	}
 }
 

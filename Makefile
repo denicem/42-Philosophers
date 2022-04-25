@@ -6,7 +6,7 @@
 #    By: dmontema <dmontema@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 17:20:21 by dmontema          #+#    #+#              #
-#    Updated: 2022/04/25 00:36:51 by dmontema         ###   ########.fr        #
+#    Updated: 2022/04/25 16:42:57 by dmontema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,10 @@ INCS	=	-I./inc
 SRC_DIR		=	./src
 SRCS		= 	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/data.c \
-				$(SRC_DIR)/activity.c \
-				$(SRC_DIR)/time.c \
+				$(SRC_DIR)/parser.c \
 				$(SRC_DIR)/ft_atoi.c \
+				$(SRC_DIR)/time.c \
+				$(SRC_DIR)/activity.c \
 				$(SRC_DIR)/philo_checker.c \
 				$(SRC_DIR)/philo_eat.c \
 				$(SRC_DIR)/philo_sleep.c
